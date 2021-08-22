@@ -8,8 +8,7 @@
         <table class="table table-striped">
             <thead>
                 <tr>
-                    <th>商品ID</th>
-                    <th>商品写真</th>
+                    <th>写真</th>
                     <th>商品名</th>
                     <th>サイズ</th>
                     <th>数量</th>
@@ -21,8 +20,9 @@
             <tbody>
                 @foreach ($items as $item)
                 <tr>
-                    <td>{!! link_to_route('items.show', $item->id, ['item' => $item->id]) !!}</td>
-                    <td>{{ $item->image_file }}</td>
+                    <td><img src="https://risanbucket.s3-ap-northeast-1.amazonaws.com/{{ $item->file }}" width="100px"></td>
+                    <form method="POST" action="items" enctype="multipart/form-data">
+                        @csrf
                     <td>{{ $item->name }}</td>
                     <td>{{ $item->size }}</td>
                     <td>{{ $item->quantity }}</td>
@@ -36,6 +36,4 @@
             </tbody>
         </table>
     @endif
-@endsection
-
-
+    @endsection

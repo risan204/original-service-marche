@@ -24,21 +24,30 @@ class ItemsController extends Controller
     //新規登録処理
     public function store(Request $request)
     {
+        $item =new Item;
+        
         // バリデーション
-        $request->validate([
+        $inputs=request()->validate([
             'name' => 'required|max:50',
             'size' => 'required|max:10',
             'area' => 'required|max:10',
             'quantity' => 'required|max:5',
             'price' => 'required|max:10',
-            'stock' => 'required|max:5'
-            
+            'stock' => 'required|max:5',
+            'file'=>'required|mimes:jpeg,png,jpg|max:2048',
         ]);
-
-        // 認証済みユーザ（閲覧者）の投稿として作成（リクエストされた値をもとに作成）
+        
+        //s3に画像を保存。第一引数はs3のディレクトリ 第二引数は保存するファイル
+        //第三引数はファイルの公開設定
+        $file = $request->file('file');
+        $path = Storage::disk('s3')->putFile('/', $file, 'public');
+        //アップロードした画像のフルパスを取得
+        $item->image_path = Storage::disk('s3')->url($path);
+        
+     // 認証済みユーザ（閲覧者）の投稿として作成（リクエストされた値をもとに作成）
         $request->user()->items()->create([
-            'item_id' => $request->item_id,
-            'image_file' => $request->image_file,
+            //'item_id' => $request->item_id,
+            'file' => $path,
             'name' => $request->name,
             'size' => $request->size,
             'area' => $request->area,
@@ -47,34 +56,25 @@ class ItemsController extends Controller
             'stock' => $request->stock,
         ]);
         
-        //Validatorファサードのmakeメソッドの第１引数は、バリデーションを行うデータ。
-        //第２引数はそのデータに適用するバリデーションルール
-         $validator = Validator::make($request->all(), [
-            'file' => 'required|max:10240|mimes:jpeg,gif,png'
-         ]);
-        //上記のバリデーションがエラーの場合、ビューにバリデーション情報を渡す
-        if ($validator->fails()){
-            return back()->withInput()->withErrors($validator);
-        }
-        //s3に画像を保存。第一引数はs3のディレクトリ。第二引数は保存するファイル。
-        //第三引数はファイルの公開設定。
-        $file = $request->file('file');
-        $path = Storage::disk('s3')->putFile('/', $file, 'public');
-        //カラムに画像のパスとタイトルを保存
-        Item::create([
-            'image_file_name' => $path,
-        ]);
-
-        return redirect('/');
-
         // トップページへリダイレクトさせる
         return redirect('/');
+    }
+    
+    public function disp()
+    {
+        $path = Storage::disk('s3')->url('hoge.jpg');
+        return view('disp', compact('path'));
     }
     
     //新規登録画面表示
     public function create()
     {
-        //
+        $item = new Item;
+        
+        //商品一覧ページを表示
+        return view('items.create',[
+            'item' => $item,
+        ]);
     }
      
     //取得表示
@@ -89,13 +89,13 @@ class ItemsController extends Controller
         ]);
     }
     
-    //更新画面処理
+    //更新画面処理（商品作成、削除）
     public function edit($id)
     {
         // idの値でメッセージを検索して取得
         $item = Item::findOrFail($id);
         
-        //商品ページ作成編集削除ビューを表示
+        //商品ページ編集ビューを表示
         return view('items.edit',[
             'item' => $item,
         ]);

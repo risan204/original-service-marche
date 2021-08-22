@@ -11,7 +11,7 @@
             <ul class="navbar-nav mr-auto"></ul>
             <ul class="navbar-nav">
                 @if (Auth::check())
-                　　{!! link_to_route('items.edit', '出品・管理する', ['item'=>$item->id], ['class' => 'btn btn-primary']) !!}
+                　　{!! link_to_route('items.create', '出品する', [], ['class' => 'btn btn-success']) !!}
                     <li class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">{{ Auth::user()->name }}</a>
                         <ul class="dropdown-menu dropdown-menu-right">

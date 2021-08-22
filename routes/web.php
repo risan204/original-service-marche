@@ -26,7 +26,9 @@ Route::post('login', 'Auth\LoginController@login')->name('login.post');
 Route::get('logout', 'Auth\LoginController@logout')->name('logout.get');
 
 Route::group(['middleware' => ['auth']], function () {
-    Route::resource('items', 'ItemsController', ['only' => ['store', 'update', 'destroy']]);
+    Route::resource('items', 'ItemsController', ['only' => ['index', 'show']]);
+    Route::resource('users', 'UsersController', ['only' => ['store', 'update', 'destroy']]);
+});    
 
 // お気に入り機能
     Route::group(['prefix' => 'items/{id}'], function () {
@@ -35,4 +37,3 @@ Route::group(['middleware' => ['auth']], function () {
     });
 
     Route::resource('items', 'ItemsController', ['only' => ['store', 'destroy']]);
-});

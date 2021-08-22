@@ -12,7 +12,7 @@
         </tr>
         <tr>
             <th>商品画像</th>
-            <td>{{ $item->image_file }}</td>
+            <td>{{ $item->file }}</td>
         </tr>
         <tr>
             <th>商品名</th>

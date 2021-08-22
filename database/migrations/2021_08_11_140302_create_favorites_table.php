@@ -15,16 +15,17 @@ class CreateFavoritesTable extends Migration
     {
        Schema::create('favorites', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('image_file,100');
+            $table->string('file,100');
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('item_id'); 
+            $table->text('file');
             $table->timestamps();
             
              // 外部キー制約
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('item_id')->references('id')->on('items')->onDelete('cascade');
             
-            // user_idとmicropost_idの組み合わせの重複を許さない
+            // user_idとitem_idの組み合わせの重複を許さない
             $table->unique(['user_id', 'item_id']);
         });
     }

@@ -14,7 +14,8 @@ class CreateItemsTable extends Migration
     public function up()
     {
         Schema::create('items', function (Blueprint $table) {
-            $table->bigIncrements('item_id');
+            $table->bigIncrements('id');
+            $table->string('file');
             $table->unsignedBigInteger('user_id');
             $table->string('name');
             $table->string('size');
@@ -24,8 +25,8 @@ class CreateItemsTable extends Migration
             $table->integer('stock');
             $table->timestamps();
             
-            //外部キー制約(items)
-            $table->foreign('user_id')->references('user_id')->on('items');
+            //外部キー制約
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
     
