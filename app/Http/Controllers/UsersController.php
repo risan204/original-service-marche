@@ -83,10 +83,10 @@ class UsersController extends Controller
     }
     
     //ユーザーのお気に入り一覧を表示するアクション。
-    public function favorites($id)
+    public function favorites()
     {
         // idの値でユーザを検索して取得
-        $user = User::findOrFail($id);
+        $user = \Auth::user();
         
         // 関係するモデルの件数をロード
         $user->loadRelationshipCounts();

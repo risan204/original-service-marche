@@ -74,7 +74,8 @@ class User extends Authenticatable
         }
     }
     
-    public function unfavorite($itemId){
+    public function unfavorite($itemId)
+    {
         //すでにお気に入りしているかの確認
         $exist = $this->is_favorite($itemId);
         
@@ -83,7 +84,7 @@ class User extends Authenticatable
             $this->favorites()->detach($itemId);
             return true;
         } else {
-            //未フォローであれば何もしない
+            //お気に入りしていなければ何もしない
             return false;
         }
     }

@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <h1>商品一覧</h1>
+    <h1>お気に入り一覧</h1>
 
     @if (count($items) > 0)
         <table class="table table-striped">

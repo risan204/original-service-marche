@@ -1,22 +1,37 @@
-@if (count($items) > 0)
-    <ul class="list-unstyled">
+    @if (count($items) > 0)
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>詳細リンク</th>
+                    <th>写真</th>
+                    <th>商品名</th>
+                    <th>サイズ</th>
+                    <th>数量</th>
+                    <th>価格</th>
+                    <th>産地</th>
+                    <th>在庫</th>
+                @if(Auth::check())
+                    <th>お気に入り</th>
+                @else
+                @endif
+                </tr>
+            </thead>
+            
+            <tbody>
         @foreach ($items as $item)
-            <li class="media mb-3">
-                {{-- 投稿の所有者のメールアドレスをもとにGravatarを取得して表示 --}}
-                <img class="mr-2 rounded" src="{{ Gravatar::get($item->user->email, ['size' => 50]) }}" alt="">
-                <div class="media-body">
-                    <div>
-                        {{-- 投稿の所有者のユーザ詳細ページへのリンク --}}
-                        {!! link_to_route('users.show', $item->user->name, ['user' => $item->user->id]) !!}
-                        <span class="text-muted">posted at {{ $item->created_at }}</span>
-                    </div>
-                    <div>
-                        {{-- 投稿内容 --}}
-                        <p class="mb-0">{!! nl2br(e($item->content)) !!}</p>
-                    </div>
-                    <div class="wrapper">
-                    <div>
-                        @if (Auth::user()->is_favorite($item->id))
+                <tr>
+                    <td>{!! link_to_route('items.show', '■',['item'=>$item->id]) !!}</td>
+                    <td><img src="https://risanbucket.s3-ap-northeast-1.amazonaws.com/{{ $item->file }}" width="100px"></td>
+                        @csrf
+                    <td>{{ $item->name }}</td>
+                    <td>{{ $item->size }}</td>
+                    <td>{{ $item->quantity }}</td>
+                    <td>¥{{ $item->price }}</td>
+                    <td>{{ $item->area }}</td>
+                    <td>{{ $item->stock }}</td>
+                    <td>
+                    @if (Auth::check())
+                        @if(Auth::user()->is_favorite($item->id))
                             {{-- お気に入り外すボタンのフォーム --}}
                             {!! Form::open(['route' => ['favorites.unfavorite', $item->id], 'method' => 'delete']) !!}
                                  {!! Form::submit('Unfavorite', ['class' => 'btn btn-success btn-sm']) !!}
@@ -27,12 +42,10 @@
                             {!! Form::submit('Favorite', ['class' => 'btn btn-light btn-sm']) !!}
                             {!! Form::close() !!}
                         @endif
-                    </div>
-                </div>
-                </div>
-            </li>
-        @endforeach
-    </ul>
-    {{-- ページネーションのリンク --}}
-    {{ $items->links() }}
-@endif
+                    @endif
+                    </td>
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
+    @endif

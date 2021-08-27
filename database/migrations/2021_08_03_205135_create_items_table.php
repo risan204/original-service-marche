@@ -15,8 +15,8 @@ class CreateItemsTable extends Migration
     {
         Schema::create('items', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('file');
             $table->unsignedBigInteger('user_id');
+            $table->string('file');
             $table->string('name');
             $table->string('size');
             $table->string('area');

@@ -15,10 +15,8 @@ class CreateFavoritesTable extends Migration
     {
        Schema::create('favorites', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('file,100');
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('item_id'); 
-            $table->text('file');
             $table->timestamps();
             
              // 外部キー制約

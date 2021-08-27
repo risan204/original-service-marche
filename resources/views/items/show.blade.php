@@ -2,17 +2,11 @@
 
 @section('content')
 
-    <h1>id = {{ $item->item_id }} のメッセージ詳細ページ</h1>
-
     <table class="table table-bordered">
-        
         <tr>
-            <th>商品ID</th>
-            <td>{{ $item->item_id }}</td>
-        </tr>
-        <tr>
-            <th>商品画像</th>
-            <td>{{ $item->file }}</td>
+            <th>写真</th>
+            <td><img src="https://risanbucket.s3-ap-northeast-1.amazonaws.com/{{ $item->file }}" width="400px"></td>
+                        @csrf
         </tr>
         <tr>
             <th>商品名</th>
@@ -39,5 +33,7 @@
             <td>{{ $item->stock }}</td>
         </tr>
     </table>
+    
+    {!! link_to_route('items.create', '購入する', [], ['class' => 'btn btn-success']) !!}
 
 @endsection

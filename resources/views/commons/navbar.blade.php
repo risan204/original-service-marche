@@ -17,10 +17,12 @@
                         <ul class="dropdown-menu dropdown-menu-right">
                             {{-- 購入履歴のリンク --}}
                             <li class="dropdown-item"><a href="#">購入履歴</a></li>
+                            <li class="dropdown-divider"></li>
                             {{-- お気に入り一覧のリンク --}}
-                            <li class="dropdown-item"><a href="#">お気に入り一覧</a></li>
+                            <li class="dropdown-item">{!! link_to_route('users.favorites', 'お気に入り一覧') !!}</li>
+                            <li class="dropdown-divider"></li>
                             {{-- ログアウトへのリンク --}}
-                            <li class="dropdown-item">{!! link_to_route('logout.get', 'Logout') !!}</li>
+                            <li class="dropdown-item">{!! link_to_route('logout.get', 'ログアウト') !!}</li>
                         </ul>
                     </li>
                 @else
