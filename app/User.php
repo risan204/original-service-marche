@@ -94,4 +94,19 @@ class User extends Authenticatable
         //お気に入りしている投稿の中に$itemIdが存在するか
         return $this->favorites()->where('item_id', $itemId)->exists();
     }
+    
+    public function purchase_histories()
+    {
+        return $this->belongsToMany(Item::class,'purchase_histories','user_id','item_id');
+    }
+    
+    public function listing_histories()
+    {
+        return $this->hasMany(Item::class); 
+    }
+    
+    public function purchase($itemId , $purchase_number)
+    {
+          return  $this->purchase_histories()->attach($itemId, ['purchase_number' => $purchase_number]);
+    }
 }

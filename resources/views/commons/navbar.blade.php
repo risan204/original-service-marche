@@ -15,8 +15,11 @@
                     <li class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">{{ Auth::user()->name }}</a>
                         <ul class="dropdown-menu dropdown-menu-right">
-                            {{-- 購入履歴のリンク --}}
-                            <li class="dropdown-item"><a href="#">購入履歴</a></li>
+                            {{-- 出品履歴のリンク --}}
+                            <li class="dropdown-item">{!! link_to_route('users.listing_histories', '出品履歴') !!}</li>
+                            <li class="dropdown-divider"></li>
+                             {{-- 購入履歴のリンク --}}
+                            <li class="dropdown-item">{!! link_to_route('users.purchase_histories', '購入履歴') !!}</li>
                             <li class="dropdown-divider"></li>
                             {{-- お気に入り一覧のリンク --}}
                             <li class="dropdown-item">{!! link_to_route('users.favorites', 'お気に入り一覧') !!}</li>

@@ -7,6 +7,7 @@ use App\Item;
 use App\User;
 use Storage;
 use Illuminate\Support\Facades\Validator;
+use Mail;
 
 class ItemsController extends Controller
 {
@@ -135,5 +136,45 @@ class ItemsController extends Controller
 
         // トップページへリダイレクトさせる
         return redirect('/');
+    }
+    
+    //購入画面表示
+    public function buy($id)
+    {
+      // idの値でメッセージを検索して取得
+        $item = Item::findOrFail($id);
+        
+        // 購入画面ビューでそれらを表示
+        return view('items.buy', [
+            'item' => $item,
+        ]);
+    }
+    
+    //購入処理
+    public function purchase(Request $request,$id)
+    {
+        // idの値でメッセージを検索して取得
+        $item = Item::findOrFail($id);
+        
+        //バリデーション
+        $inputs= request()->validate([
+            'purchase_number' => 'required|max:'.$item->stock,
+        ]);
+
+        // 認証済みユーザ（閲覧者）が購入（リクエストされた値をもとに作成）
+        $request->user()->purchase($id, $request->purchase_number);
+        
+        // 投稿を更新
+        $item->stock = $item->stock - $request->purchase_number;
+        $item->save();
+
+        Mail::send('emails.confirmation',[], function($message){
+          $message->to('rnrnrnrn.0518@gmail.com', 'Test')
+                   ->subject('購入完了！');
+        });
+        
+        //ありがとうページにリダイレクトする
+        return view('items.thankyou');
+        
     }
 }

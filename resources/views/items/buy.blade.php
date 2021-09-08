@@ -34,6 +34,18 @@
         </tr>
     </table>
     
-    {!! link_to_route('items.buy', '購入ページへ', ['id'=>$item->id], ['class' => 'btn btn-success']) !!}
+    {!! Form::model($item, ['route' => ['items.purchase',$item->id]]) !!}
+            <div class="form-group row">
+            <div class="col-sm-3">{!! Form::label('purchase_number', '数量:') !!}</div>
+            <div class="col-sm-9">{!! Form::number('purchase_number', null, ['class' => 'form-control']) !!}</div>
+            </div>
+    
+    {!! Form::submit('購入する', ['class' => 'btn btn-success']) !!}
+    {!! Form::close() !!}
+    
+    <br><br>
+    <div class="explanetion">
+    ※購入後メールが届きますので決済方法、送付先等ご指定下さい。
+    </div>
 
 @endsection

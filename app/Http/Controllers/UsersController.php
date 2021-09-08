@@ -104,4 +104,42 @@ class UsersController extends Controller
             'items' => $items,
         ]);
     }
+    
+    //購入履歴を表示するアクション。
+    public function purchase_histories()
+    {
+        // idの値でユーザを検索して取得
+        $user = \Auth::user();
+        
+        // 関係するモデルの件数をロード
+        $user->loadRelationshipCounts();
+        
+        // ユーザの投稿一覧を作成日時の降順で取得
+        $items = $user->purchase_histories()->orderBy('created_at', 'desc')->paginate(10);
+        
+        // 購入履歴でそれらを表示
+        return view('users.purchase_histories', [
+            'user' => $user,
+            'items' => $items,
+        ]);
+    }
+    
+    //出品履歴を表示するアクション。
+    public function listing_histories()
+    {
+        // idの値でユーザを検索して取得
+        $user = \Auth::user();
+        
+        // 関係するモデルの件数をロード
+        $user->loadRelationshipCounts();
+        
+        // ユーザの出品一覧を作成日時の降順で取得
+        $items = $user->listing_histories()->orderBy('created_at', 'desc')->paginate(10);
+        
+        // 出品履歴でそれらを表示
+        return view('users.listing_histories', [
+            'user' => $user,
+            'items' => $items,
+        ]);
+    }
 }

@@ -13,8 +13,6 @@
 //トップページ
 Route::get('/', 'ItemsController@index');
 
-
-
 // ユーザ登録
 Route::get('signup', 'Auth\RegisterController@showRegistrationForm')->name('signup.get');
 Route::post('signup', 'Auth\RegisterController@register')->name('signup.post');
@@ -27,12 +25,21 @@ Route::get('logout', 'Auth\LoginController@logout')->name('logout.get');
 Route::group(['middleware' => ['auth']], function () {
     //コントローラー毎に設定要
     Route::resource('items', 'ItemsController');
-    
-    Route::resource('users', 'UsersController', ['only' => ['store', 'update', 'destroy']]);
     Route::get('favorites', 'UsersController@favorites')->name('users.favorites');
-    // お気に入り機能
+    //購入履歴、出品履歴
+    Route::get('purchase_histories','UsersController@purchase_histories')->name('users.purchase_histories');
+    Route::get('listing_histories','UsersController@listing_histories')->name('users.listing_histories');
+    
     Route::group(['prefix' => 'items/{id}'], function () {
+        //購入フォームの表示
+        Route::get('buy','ItemsController@buy')->name('items.buy');
         Route::post('favorite', 'FavoritesController@store')->name('favorites.favorite');
         Route::delete('unfavorite', 'FavoritesController@destroy')->name('favorites.unfavorite');
+        
+        //購入処理(items.purchaseのルート)
+        Route::post('purchase','ItemsController@purchase')->name('items.purchase');
     });
+    
 });
+
+Route::get('/mail', 'MailSendController@send');
