@@ -11,16 +11,27 @@ use Mail;
 
 class ItemsController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        //昇順に並べる
-        $items = Item::orderBy('updated_at', 'desc')->paginate(10);
+        //検索
+        $query = Item::query();
+        
+        $keyword = $request->name;
+        
+        if ($keyword) {
+            $query->where('name', $keyword);
+            $query->orwhere('area', $keyword);
+        }
+        
+        //データ取得
+        $items = $query->orderBy('updated_at', 'desc')->paginate(10);
         
         //商品一覧ビューでそれらを表示
         return view('items.index', [
             'items' => $items,
         ]);
     }
+    
 
     //新規登録処理
     public function store(Request $request)

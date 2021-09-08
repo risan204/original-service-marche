@@ -42,4 +42,8 @@ Route::group(['middleware' => ['auth']], function () {
     
 });
 
+//購入後メール送信
 Route::get('/mail', 'MailSendController@send');
+
+//検索ボタンを押すとコントローラのindexメソッドを実行します
+Route::get('index','ItemsController@index')->name('search');

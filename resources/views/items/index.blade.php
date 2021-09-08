@@ -3,6 +3,8 @@
 @section('content')
 
     <h1>商品一覧</h1>
+    
+    @include('users.search')
 
     @if (count($items) > 0)
         <table class="table table-striped">
