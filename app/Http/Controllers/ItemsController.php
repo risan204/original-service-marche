@@ -45,7 +45,7 @@ class ItemsController extends Controller
         //アップロードした画像のフルパスを取得
         $item->image_path = Storage::disk('s3')->url($path);
         
-     // 認証済みユーザ（閲覧者）の投稿として作成（リクエストされた値をもとに作成）
+        // 認証済みユーザ（閲覧者）の投稿として作成（リクエストされた値をもとに作成）
         $request->user()->items()->create([
             //'item_id' => $request->item_id,
             'file' => $path,
@@ -90,7 +90,7 @@ class ItemsController extends Controller
         ]);
     }
     
-    //更新画面処理（商品作成、削除）
+    //更新画面処理
     public function edit($id)
     {
         // idの値でメッセージを検索して取得
@@ -113,9 +113,14 @@ class ItemsController extends Controller
         
         // 認証済みユーザ（閲覧者）がその投稿の所有者である場合は、投稿を更新
         if (\Auth::id() === $item->user_id) {
-        $item->item_id = $request->item_id;
-        $item->price = $request->price;
+        $item->name = $request->name;
+        $item->size = $request->size;
         $item->quantity = $request->quantity;
+        $item->price = $request->price;
+        $item->area = $request->area;
+        $item->stock = $request->stock;
+        
+        
         $item->save();
         
         //トップページへリダイレクト
@@ -127,7 +132,7 @@ class ItemsController extends Controller
     public function destroy($id)
     {
         // idの値でメッセージを検索して取得
-        $item = Item::findOrFail($id);
+        $item = \App\Item::findOrFail($id);
 
         // 認証済みユーザ（閲覧者）がその投稿の所有者である場合は、投稿を削除
         if (\Auth::id() === $item->user_id) {
