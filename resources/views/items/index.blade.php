@@ -1,8 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-
-    <h1>商品一覧</h1>
     
     @include('users.search')
 
@@ -41,7 +39,7 @@
                         @if(Auth::user()->is_favorite($item->id))
                             {{-- お気に入り外すボタンのフォーム --}}
                             {!! Form::open(['route' => ['favorites.unfavorite', $item->id], 'method' => 'delete']) !!}
-                                 {!! Form::submit('Unfavorite', ['class' => 'btn btn-success btn-sm']) !!}
+                                 {!! Form::submit('Unfavorite', ['class' => 'btn btn-secondary btn-sm']) !!}
                             {!! Form::close() !!}
                         @else
                             {{-- 　お気に入りボタンのフォーム --}}
