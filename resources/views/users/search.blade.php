@@ -1,10 +1,14 @@
-<div class="row">
-        <div class="col-sm-4">
-            {!! Form::open(['route' => 'search', 'method' => 'get']) !!}
-                <div class="form-group">
-                    {!! Form::text('name' ,'', ['class' => 'form-control', 'placeholder' => '商品名、産地から検索'] ) !!}
-                </div>
-                {!! Form::submit('検索', ['class' => 'btn btn-success btn-block']) !!}
-            {!! Form::close() !!}
-        </div>
-        </div>
+<div class="form-group row">
+    <table>
+      <tr>
+      {!! Form::open(['route' => 'search', 'method' => 'get']) !!}
+        <td>
+            {!! Form::text('name' ,'', ['class' => 'form-control', 'placeholder' => '商品名、産地から検索'] ) !!}
+        </td>
+        <td>
+            {!! Form::submit('検索', ['class' => 'btn btn-success btn-block']) !!}
+        </td>
+      {!! Form::close() !!}
+      </tr>
+    </table>
+</div>

@@ -35,16 +35,22 @@
     </table>
     
     {!! link_to_route('items.buy', '購入ページへ', ['id'=>$item->id], ['class' => 'btn btn-success']) !!}
-    
+    <br>
     {{-- メッセージ編集ページへのリンク --}}
-    @if (Auth::id() == $item->user_id)
-    {!! link_to_route('items.edit', '商品詳細編集', ['item' => $item->id], ['class' => 'btn btn-light']) !!}
-    
-    {{-- メッセージ削除フォーム --}}
-    {!! Form::model($item, ['route' => ['items.destroy', $item->id], 'method' => 'delete']) !!}
-        {!! Form::submit('商品削除', ['class' => 'btn btn-light']) !!}
-    {!! Form::close() !!}
-    @endif
+    <table>
+      <tr>
+        <td>@if (Auth::id() == $item->user_id)
+        {!! link_to_route('items.edit', '商品詳細編集', ['item' => $item->id], ['class' => 'btn btn-light']) !!}
+        </td>
+        <td>
+        {{-- メッセージ削除 --}}
+        {!! Form::model($item, ['route' => ['items.destroy', $item->id], 'method' => 'delete']) !!}
+          {!! Form::submit('商品削除', ['class' => 'btn btn-light']) !!}
+        {!! Form::close() !!}
+        </td>
+      </tr>
+    </table>
+            @endif
 
 
 @endsection
