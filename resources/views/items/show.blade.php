@@ -17,8 +17,8 @@
             <td>{{ $item->size }}</td>
         </tr>
         <tr>
-            <th>数量</th>
-            <td>{{ $item->quantity }}</td>
+            <th>梱包数</th>
+            <td>{{ $item->quantity }}個</td>
         </tr>
         <tr>
             <th>価格</th>
@@ -30,7 +30,7 @@
         </tr>
         <tr>
             <th>在庫</th>
-            <td>{{ $item->stock }}</td>
+            <td>{{ $item->stock }}セット</td>
         </tr>
     </table>
     

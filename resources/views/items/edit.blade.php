@@ -21,7 +21,7 @@
                     <div class="col-sm-9">{!! Form::text('size', null, ['class' => 'form-control']) !!}</div>
                 </div>
                 <div class="form-group row">
-                    <div class="col-sm-3">{!! Form::label('quantity', '数量:') !!}</div>
+                    <div class="col-sm-3">{!! Form::label('quantity', '梱包数:') !!}</div>
                     <div class="col-sm-9">{!! Form::number('quantity', null, ['class' => 'form-control']) !!}</div>
                 </div>
                 <div class="form-group row">

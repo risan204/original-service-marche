@@ -8,11 +8,10 @@
         <table class="table table-striped">
             <thead>
                 <tr>
-                    <th>詳細リンク</th>
                     <th>写真</th>
-                    <th>商品名</th>
+                    <th>商品名(詳細リンク)</th>
                     <th>サイズ</th>
-                    <th>数量</th>
+                    <th>梱包数</th>
                     <th>価格</th>
                     <th>産地</th>
                     <th>在庫</th>
@@ -25,15 +24,14 @@
             <tbody>
                 @foreach ($items as $item)
                 <tr>
-                    <td>{!! link_to_route('items.show', '■',['item'=>$item->id]) !!}</td>
                     <td><img src="https://risanbucket.s3-ap-northeast-1.amazonaws.com/{{ $item->file }}" width="100px"></td>
                         @csrf
-                    <td>{{ $item->name }}</td>
+                    <td>{!! link_to_route('items.show', $item->name ,['item'=>$item->id]) !!}</td>
                     <td>{{ $item->size }}</td>
-                    <td>{{ $item->quantity }}</td>
+                    <td>{{ $item->quantity }}個</td>
                     <td>¥{{ $item->price }}</td>
                     <td>{{ $item->area }}</td>
-                    <td>{{ $item->stock }}</td>
+                    <td>{{ $item->stock }}セット</td>
                     <td>
                     @if (Auth::check())
                         @if(Auth::user()->is_favorite($item->id))
@@ -47,11 +45,12 @@
                             {!! Form::submit('Favorite', ['class' => 'btn btn-light btn-sm']) !!}
                             {!! Form::close() !!}
                         @endif
-                    @endif
                     </td>
                 </tr>
+                    @endif
                 @endforeach
             </tbody>
         </table>
+    @else<p style="font-size:25px;">対象の商品がありません。</p>
     @endif
 @endsection

@@ -19,7 +19,7 @@ class ItemsController extends Controller
         $keyword = $request->name;
         
         if ($keyword) {
-            $query->where('name', $keyword);
+            $query->where('name', "like", "%$keyword%");
             $query->orwhere('area', $keyword);
         }
         

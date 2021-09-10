@@ -17,8 +17,8 @@
             <td>{{ $item->size }}</td>
         </tr>
         <tr>
-            <th>数量</th>
-            <td>{{ $item->quantity }}</td>
+            <th>梱包数</th>
+            <td>{{ $item->quantity }}個</td>
         </tr>
         <tr>
             <th>価格</th>
@@ -29,23 +29,21 @@
             <td>{{ $item->area }}</td>
         </tr>
         <tr>
-            <th>在庫</th>
-            <td>{{ $item->stock }}</td>
+            <th>販売在庫</th>
+            <td>{{ $item->stock }}セット</td>
         </tr>
     </table>
     
-    {!! Form::model($item, ['route' => ['items.purchase',$item->id]]) !!}
+    <p style="padding-top:15px;">{!! Form::model($item, ['route' => ['items.purchase',$item->id]]) !!}
             <div class="form-group row">
-            <div class="col-sm-3">{!! Form::label('purchase_number', '数量:') !!}</div>
-            <div class="col-sm-9">{!! Form::number('purchase_number', null, ['class' => 'form-control']) !!}</div>
+            <div class="col-sm-3">{!! Form::label('purchase_number', '購入数:') !!}</div>
+            <div class="col-sm-4">{!! Form::number('purchase_number', null, ['class' => 'form-control']) !!}</div>
+            <div class="col-sm-3">セット</div>
             </div>
-    
     {!! Form::submit('購入する', ['class' => 'btn btn-success']) !!}
     {!! Form::close() !!}
-    
-    <br><br>
+    </p>
     <div class="explanetion">
     ※購入後メールが届きますので決済方法、送付先等ご指定下さい。
     </div>
-
 @endsection
