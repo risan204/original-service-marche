@@ -14,7 +14,7 @@ class MailSendController extends Controller
         $to = [
             [
                 'email' => 'rnrnrnrn.0518@gmail.com',
-                'name' => 'Test',
+                'name' => '購入完了！',
             ]
             
         ];

@@ -185,12 +185,10 @@ class ItemsController extends Controller
         $item->save();
 
         Mail::send('emails.confirmation',[], function($message){
-          $message->to('rnrnrnrn.0518@gmail.com', 'Test')
+          $message->to(\Auth::user()->email, 'VegetableMarche')
                    ->subject('購入完了！');
         });
-        
         //ありがとうページにリダイレクトする
         return view('items.thankyou');
-        
     }
 }

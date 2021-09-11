@@ -30,6 +30,6 @@ class SendConfirmationMail extends Mailable
     {
         return $this->view('emails.confirmation')
                     ->from('rnrnrnrn.0518@gmail.com','Test')
-                    ->subject('購入完了しました！');
+                    ->subject('購入完了！');
     }
 }
