@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Item extends Model
 {
-    //後に、edit()メソッドで保存するカラムを指定
     protected $fillable = ['item_id','file','name','size','area','quantity','price','stock'];
 
     /**

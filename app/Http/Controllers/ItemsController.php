@@ -43,9 +43,9 @@ class ItemsController extends Controller
             'name' => 'required|max:50',
             'size' => 'required|max:10',
             'area' => 'required|max:10',
-            'quantity' => 'required|max:5',
-            'price' => 'required|max:10',
-            'stock' => 'required|max:5',
+            'quantity' => 'required|integer|min:1',
+            'price' => 'required|integer|min:1',
+            'stock' => 'required|integer|min:1',
             'file'=>'required|mimes:jpeg,png,jpg|max:2048',
         ]);
         
@@ -121,6 +121,16 @@ class ItemsController extends Controller
     {
         // idの値でメッセージを検索して取得
         $item = Item::findOrFail($id);
+        
+        // バリデーション
+        $id=request()->validate([
+            'name' => 'required|max:50',
+            'size' => 'required|max:10',
+            'area' => 'required|max:10',
+            'quantity' => 'required|integer|min:1',
+            'price' => 'required|integer|min:1',
+            'stock' => 'required|integer|min:1',
+        ]);
         
         // 認証済みユーザ（閲覧者）がその投稿の所有者である場合は、投稿を更新
         if (\Auth::id() === $item->user_id) {
