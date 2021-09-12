@@ -36,6 +36,10 @@
                     <div class="col-sm-9">{!! Form::text('area', null, ['class' => 'form-control']) !!}</div>
                 </div>
                 <div class="form-group row">
+                    <div class="col-sm-3">{!! Form::label('comment', 'コメント(200字以内):') !!}</div>
+                    <div class="col-sm-9">{!! Form::textarea('comment', null, ['class' => 'form-control']) !!}</div>
+                </div>
+                <div class="form-group row">
                     <div class="col-sm-3">{!! Form::label('stock', '在庫:') !!}</div>
                     <div class="col-sm-9">{!! Form::number('stock', null, ['class' => 'form-control']) !!}</div>
                 </div>

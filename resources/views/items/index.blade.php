@@ -14,6 +14,7 @@
                     <th>梱包数</th>
                     <th>価格</th>
                     <th>産地</th>
+                    <th>生産者からのコメント</th>
                     <th>在庫</th>
                 @if(Auth::check())
                     <th>お気に入り</th>
@@ -31,6 +32,7 @@
                     <td>{{ $item->quantity }}個</td>
                     <td>¥{{ $item->price }}</td>
                     <td>{{ $item->area }}</td>
+                    <td>{{ Str::limit($item->comment, 20 , '....' ) }}</td>
                     @if($item->stock == 0)
                       <td><div style="color:red;">売り切れ</div></td>
                     @else<td>{{ $item->stock }}セット</td>

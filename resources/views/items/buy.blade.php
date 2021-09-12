@@ -29,6 +29,10 @@
             <td>{{ $item->area }}</td>
         </tr>
         <tr>
+            <th>生産者からのコメント</th>
+            <td>{!! nl2br(e( $item->comment )) !!}</td>
+        </tr>
+        <tr>
             <th>販売在庫</th>
             <td>{{ $item->stock }}セット</td>
         </tr>

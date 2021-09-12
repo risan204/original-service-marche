@@ -29,18 +29,22 @@
             <td>{{ $item->area }}</td>
         </tr>
         <tr>
+            <th width="190">生産者からのコメント</th>
+            <td>{!! nl2br(e( $item->comment )) !!}</td>
+        </tr>
+        <tr>
             <th>在庫</th>
             <td>{{ $item->stock }}セット</td>
         </tr>
     </table>
     
-    {!! link_to_route('items.buy', '購入ページへ', ['id'=>$item->id], ['class' => 'btn btn-success']) !!}
+    <p>{!! link_to_route('items.buy', '購入ページへ', ['id'=>$item->id], ['class' => 'btn btn-success']) !!}</p>
     <br>
     {{-- メッセージ編集ページへのリンク --}}
     <table>
       <tr>
         <td>@if (Auth::id() == $item->user_id)
-        {!! link_to_route('items.edit', '商品詳細編集', ['item' => $item->id], ['class' => 'btn btn-light']) !!}
+        <div style="padding-right:20px;">{!! link_to_route('items.edit', '商品詳細編集', ['item' => $item->id], ['class' => 'btn btn-light']) !!}</div>
         </td>
         <td>
         {{-- メッセージ削除 --}}
@@ -51,6 +55,4 @@
       </tr>
     </table>
             @endif
-
-
 @endsection

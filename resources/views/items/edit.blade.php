@@ -4,8 +4,6 @@
 
     <h1>商品内容編集</h1>
 
-    <div class="row">
-        <div class="col-6">
              {!! Form::model($item, ['route' => ['items.update', $item->id], 'method' => 'put']) !!}
             {{-- 商品編集ページへのリンク --}}
                 <div class="form-group row">
@@ -27,6 +25,10 @@
                 <div class="form-group row">
                     <div class="col-sm-3">{!! Form::label('area', '産地:') !!}</div>
                     <div class="col-sm-9">{!! Form::text('area', null, ['class' => 'form-control']) !!}</div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-3">{!! Form::label('comment', 'コメント:(200字以内)') !!}</div>
+                    <div class="col-sm-9">{!! Form::textarea('comment', null, ['class' => 'form-control']) !!}</div>
                 </div>
                 <div class="form-group row">
                     <div class="col-sm-3">{!! Form::label('stock', '在庫:') !!}</div>

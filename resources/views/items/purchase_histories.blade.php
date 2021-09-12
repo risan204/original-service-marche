@@ -13,6 +13,7 @@
                     <th>サイズ</th>
                     <th>梱包数</th>
                     <th>価格</th>
+                    <th>生産者からのコメント</th>
                     <th>産地</th>
                 </tr>
             </thead>
@@ -25,6 +26,7 @@
                     <td>{{ $item->size }}</td>
                     <td>{{ $item->quantity }}個</td>
                     <td>¥{{ $item->price }}</td>
+                    <td>{{ Str::limit($item->comment, 20 , '....' ) }}</td>
                     <td>{{ $item->area }}</td>
                 </tr>
                 @endforeach

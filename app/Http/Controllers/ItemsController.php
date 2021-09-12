@@ -45,6 +45,7 @@ class ItemsController extends Controller
             'area' => 'required|max:10',
             'quantity' => 'required|integer|min:1',
             'price' => 'required|integer|min:1',
+             'comment' => 'required|max:200',
             'stock' => 'required|integer|min:1',
             'file'=>'required|mimes:jpeg,png,jpg|max:2048',
         ]);
@@ -65,6 +66,7 @@ class ItemsController extends Controller
             'area' => $request->area,
             'quantity' => $request->quantity,
             'price' => $request->price,
+            'comment' => $request->comment,
             'stock' => $request->stock,
         ]);
         
@@ -129,6 +131,7 @@ class ItemsController extends Controller
             'area' => 'required|max:10',
             'quantity' => 'required|integer|min:1',
             'price' => 'required|integer|min:1',
+            'comment' => 'required|max:200',
             'stock' => 'required|integer|min:1',
         ]);
         
@@ -136,9 +139,10 @@ class ItemsController extends Controller
         if (\Auth::id() === $item->user_id) {
         $item->name = $request->name;
         $item->size = $request->size;
+        $item->area = $request->area;
         $item->quantity = $request->quantity;
         $item->price = $request->price;
-        $item->area = $request->area;
+        $item->comment = $request->comment;
         $item->stock = $request->stock;
         
         

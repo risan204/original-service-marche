@@ -1,7 +1,7 @@
 <header class="mb-4">
     <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
         {{-- トップページへのリンク --}}
-        <a class="navbar-brand" href="/"><p style="font-size:25px">Vegetable Marche</p></a>
+        <a class="navbar-brand" href="/"><p style="font-size:25px">Vegetable Marche<img alt="VegetableMarche" src="{{ asset('favicon.ico') }}"></p></a>
         
         <p style="color: white;">農家から消費者へ直接新鮮野菜をお届け！<br>農家を応援～野菜・果物マルシェ～</p>
 

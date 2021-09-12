@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Item extends Model
 {
-    protected $fillable = ['item_id','file','name','size','area','quantity','price','stock'];
+    protected $fillable = ['item_id','file','name','size','area','quantity','price','comment','stock'];
 
     /**
      * この投稿を所有するユーザ。（ Userモデルとの関係を定義）

@@ -22,6 +22,7 @@ class CreateItemsTable extends Migration
             $table->string('area');
             $table->integer('quantity');
             $table->integer('price');
+            $table->string('comment');
             $table->integer('stock');
             $table->timestamps();
             
